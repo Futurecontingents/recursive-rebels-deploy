@@ -1,0 +1,9 @@
+Backend logic test execution log
+===============================
+
+Command run:
+pytest -q Docs/backend/logic_test
+
+Result:
+..................                                                       [100%]
+18 passed in 0.13s

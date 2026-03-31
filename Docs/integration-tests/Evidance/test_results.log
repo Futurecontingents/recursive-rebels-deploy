@@ -1,0 +1,68 @@
+test DB ready: C:\Users\alexa\RecursiveRebels\Backend\test_integration.db, transit points: 3
+ * Serving Flask app 'test_integration'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5099
+Press CTRL+C to quit
+127.0.0.1 - - [31/Mar/2026 01:59:54] "POST /api/listings HTTP/1.1" 201 -
+127.0.0.1 - - [31/Mar/2026 01:59:54] "GET /api/listings/1 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Mar/2026 01:59:55] "POST /api/listings HTTP/1.1" 201 -
+127.0.0.1 - - [31/Mar/2026 01:59:55] "GET /api/listings/2 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Mar/2026 01:59:55] "POST /api/listings HTTP/1.1" 400 -
+127.0.0.1 - - [31/Mar/2026 01:59:55] "GET /api/listings HTTP/1.1" 200 -
+test server up on :5099
+
+============================================================
+INTEGRATION TEST � RUNNING
+============================================================
+
+[TEST 1] Bayut listing � transit distance + score
+transform input: 1 rows
+dropped 0 rows missing title
+dropped 0 rows with bad price
+dropped 0 rows missing coords
+dedup: 1 -> 1
+cross-platform dupes flagged: 0
+transform output: 1 rows
+  raw response: dist=299.66, score=8.48, band=High
+  [PASS] bayut dist_transit: expected=299.66, actual=299.66, diff=0.0, tol=2.0
+  [PASS] bayut final_score: expected=8.48, actual=8.48, diff=0.0, tol=0.05
+  [PASS] bayut score_band: expected='High', actual='High'
+
+[TEST 2] PropertyFinder listing � no nearby bus, score degraded
+transform input: 1 rows
+dropped 0 rows missing title
+dropped 0 rows with bad price
+dropped 0 rows missing coords
+dedup: 1 -> 1
+cross-platform dupes flagged: 0
+transform output: 1 rows
+  raw response: dist=299.66, score=6.0, band=Medium
+  [PASS] pf dist_transit: expected=299.66, actual=299.66, diff=0.0, tol=2.0
+  [PASS] pf final_score: expected=6.0, actual=6.0, diff=0.0, tol=0.05
+  [PASS] pf score_band: expected='Medium', actual='Medium'
+
+[TEST 3] Duplicate listing rejected
+transform input: 1 rows
+dropped 0 rows missing title
+dropped 0 rows with bad price
+dropped 0 rows missing coords
+dedup: 1 -> 1
+cross-platform dupes flagged: 0
+transform output: 1 rows
+  [PASS] duplicate correctly rejected with 400
+
+[TEST 4] GET /api/listings returns both inserted listings
+  [PASS] 2 listings returned, all have non-zero transit distance
+
+============================================================
+RESULTS SUMMARY
+============================================================
+  [OK] TEST 1 � Bayut transit validation: PASS
+  [OK] TEST 2 � PF transit validation (no bus): PASS
+  [OK] TEST 3 � Duplicate rejection: PASS
+  [OK] TEST 4 � GET all listings data integrity: PASS
+
+ALL TESTS PASSED
+============================================================
+test DB cleaned up

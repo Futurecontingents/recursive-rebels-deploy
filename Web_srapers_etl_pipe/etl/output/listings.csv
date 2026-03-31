@@ -1,0 +1,3 @@
+﻿listing_id,platform,title,price,currency,location,latitude,longitude,property_type,bedrooms,bathrooms,size,size_unit,agent,realtor_company,listing_url,listing_date,duplicate_group_id
+111,bayut,Luxury 2BR near Metro,1200000.0,AED,Downtown Dubai,25.1975,55.2796,Apartment,2,2,1100.0,sqft,Sara Ahmed,Emaar Realty,https://www.bayut.com/property/111/,2026-02-01,
+222,propertyfinder,Spacious Villa in Arabian Ranches,2500000.0,AED,Arabian Ranches,25.0453,55.2678,Villa,4,5,4500.0,sqft,,Hamptons International,https://www.propertyfinder.ae/property/222/,,

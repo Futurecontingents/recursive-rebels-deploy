@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.db
+.venv/
+Web_srapers_etl_pipe/.venv/
+Web_srapers_etl_pipe/run_outputs/
+Web_srapers_etl_pipe/scraper/logs/

@@ -1,0 +1,17 @@
+Frontend unit tests executed successfully.
+
+Covered areas:
+- price parsing
+- property type mapping
+- listing normalization
+- default fallback handling
+- filtering by price
+- filtering by transit score
+- filtering by distance
+- filtering by property type
+- filtering by accessibility
+- high contrast toggle state
+- text scale state handling
+
+Result:
+All frontend unit tests passed.

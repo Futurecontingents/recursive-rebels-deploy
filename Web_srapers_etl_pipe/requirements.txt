@@ -1,0 +1,17 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Dubai Real Estate Enrichment Layer — Python Dependencies
+# ──────────────────────────────────────────────────────────────────────────────
+# Install with:
+#   pip install -r requirements.txt
+#   playwright install chromium
+
+# ── Scraper ───────────────────────────────────────────────────────────────────
+playwright==1.43.0
+playwright-stealth==2.0.2
+
+# ── ETL / Data Processing ─────────────────────────────────────────────────────
+pandas==2.2.2              
+numpy==1.26.4               
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+python-dateutil==2.9.0     

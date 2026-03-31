@@ -1,11 +1,36 @@
 from flask import Blueprint, jsonify, request
+from pathlib import Path
 from repository.ListingRepository import ListingRepository
 from service.ListingService import ListingService
+from import_transport_data import import_metro_data, import_bus_data
 
 listing_bp = Blueprint("listing_bp", __name__)
 
 repository = ListingRepository("property.db")
 service = ListingService(repository)
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DB_PATH = BASE_DIR / "property.db"
+SCHEMA_PATH = BASE_DIR / "database.sql"
+
+
+@listing_bp.route("/api/admin/import-transport", methods=["POST"])
+def import_transport():
+    try:
+        repo = ListingRepository(str(DB_PATH))
+        repo.create_tables_from_schema(str(SCHEMA_PATH))
+        repo.clear_transport_points()
+        import_metro_data(repo)
+        import_bus_data(repo)
+
+        return jsonify({
+            "message": "Transport data imported successfully",
+            "transportPoints": repo.count_transport_points()
+        }), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 
 @listing_bp.route("/api/health", methods=["GET"])
